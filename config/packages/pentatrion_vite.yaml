@@ -1,0 +1,6 @@
+pentatrion_vite:
+  throw_on_missing_entry: true
+
+when@prod:
+  pentatrion_vite:
+    cache: true
