@@ -1,0 +1,18 @@
+parameters:
+    level: max
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+
+    # https://phpstan.org/config-reference#vague-typehints
+#    checkMissingIterableValueType: false
+
+    symfony:
+        containerXmlPath: var/cache/test/App_KernelTestDebugContainer.xml
+        consoleApplicationLoader: tests/console-application.php
+
+    scanDirectories:
+        - var/cache/test/Symfony/Config
