@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\ExternalApi\Recruitis;
 
+use DateTimeImmutable;
+
 class Meta
 {
     public function __construct(
+        public readonly bool $cached,
+        public readonly ?DateTimeImmutable $cachedFrom,
         public readonly string $code,
         public readonly int $duration,
         public readonly string $message,
@@ -19,7 +23,13 @@ class Meta
 
     public static function fromArray(array $data): self
     {
+        if (isset($data['cached_from'])) {
+            $cachedFrom = new DateTimeImmutable($data['cached_from']);
+        }
+
         return new self(
+            $data['cached'] ?? false,
+            $cachedFrom ?? null,
             $data['code'],
             $data['duration'],
             $data['message'],

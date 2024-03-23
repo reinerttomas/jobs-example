@@ -9,7 +9,7 @@ class Profession
     public function __construct(
         public readonly int $id,
         public readonly string $name,
-        public readonly int $count,
+        public readonly ?int $count,
     ) {
     }
 
@@ -18,7 +18,7 @@ class Profession
         return new self(
             $data['id'],
             $data['name'],
-            $data['count'],
+            $data['count'] ?? null,
         );
     }
 }

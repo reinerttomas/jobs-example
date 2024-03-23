@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workfields{% endblock %}
+
+{% block content %}
+    {% if workfields %}
+        <div class="card">
+            <div class="card-header">Workfields ({{ total }})</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Professions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for workfield in workfields %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ workfield.name }}</td>
+                            <td>{{ workfield.professions|length }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
