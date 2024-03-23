@@ -46,6 +46,6 @@ class JobController extends AbstractController
     #[Route('/vue', name: 'app_job_vue')]
     public function vue(): Response
     {
-        return $this->render('job/index.html.twig');
+        return $this->render('job/vue.html.twig');
     }
 }
