@@ -76,29 +76,8 @@ class Job
             $closedDuration = $data['closed_duration'];
         }
 
-        /** @var Workfield[] $workfields */
-        $workfields = [];
-
-        foreach ($data['workfields'] as $workfield) {
-            $workfields[] = Workfield::fromArray($workfield);
-        }
-
-        /** @var JobFilter[] $jobFilters */
-        $jobFilters = [];
-
-        foreach ($data['filterlist'] as $filter) {
-            $jobFilters[] = JobFilter::fromArray($filter);
-        }
-
         if (isset($data['details'])) {
             $jobDetail = JobDetail::fromArray($data['details']);
-        }
-
-        /** @var Address[] $addresses */
-        $addresses = [];
-
-        foreach ($data['addresses'] as $address) {
-            $addresses[] = Address::fromArray($address);
         }
 
         // TODO: workaround, dle dokumentace má vracet Employment[], ale vrací Employment
@@ -140,14 +119,14 @@ class Job
             new DateTimeImmutable($data['date_created_origin']),
             new DateTimeImmutable($data['last_update']),
             $data['text_language'],
-            $workfields,
-            $jobFilters,
+            array_map(fn (array $item): Workfield => Workfield::fromArray($item), $data['workfields']),
+            array_map(fn (array $item): JobFilter => JobFilter::fromArray($item), $data['filterlist']),
             Education::fromArray($data['education']),
             $data['disability'],
             $jobDetail ?? null,
             Personalist::fromArray($data['personalist']),
             JobContact::fromArray($data['contact']),
-            $addresses,
+            array_map(fn (array $item): Address => Address::fromArray($item), $data['addresses']),
             $employments,
             $jobStats ?? null,
             $salary ?? null,
