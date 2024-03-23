@@ -11,4 +11,26 @@ enum AccessState: int
     case ARCHIVED = 3;
     case DRAFT = 4;
     case TEMPLATE = 5;
+
+    public function description(): string
+    {
+        return match ($this) {
+            self::OPEN => 'Open',
+            self::CLOSED => 'Closed',
+            self::ARCHIVED => 'Archived',
+            self::DRAFT => 'Draft',
+            self::TEMPLATE => 'Template',
+        };
+    }
+
+    public function color(): string
+    {
+        return match ($this) {
+            self::OPEN => 'success',
+            self::CLOSED => 'danger',
+            self::ARCHIVED => 'warning',
+            self::DRAFT => 'info',
+            self::TEMPLATE => 'secondary',
+        };
+    }
 }

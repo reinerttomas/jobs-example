@@ -11,7 +11,7 @@ class Address
         public readonly int $officeId,
         public readonly string $city,
         public readonly string $postcode,
-        public readonly string $street,
+        public readonly ?string $street,
         public readonly string $region,
         public readonly string $state,
         public readonly bool $isPrimary,

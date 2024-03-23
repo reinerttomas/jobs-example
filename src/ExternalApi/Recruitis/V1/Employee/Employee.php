@@ -14,7 +14,7 @@ class Employee
         public readonly string $email,
         public readonly string $photoUrl,
         public readonly string $phone,
-        public readonly string $linkedin,
+        public readonly ?string $linkedin,
     ) {
     }
 

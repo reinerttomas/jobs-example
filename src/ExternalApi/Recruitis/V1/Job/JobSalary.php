@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\ExternalApi\Recruitis\V1\Job;
 
-use App\ExternalApi\Recruitis\V1\Currency;
+use App\ExternalApi\Recruitis\V1\Enum\Currency;
 use App\ExternalApi\Recruitis\V1\Enum\SalaryUnit;
 
 class JobSalary

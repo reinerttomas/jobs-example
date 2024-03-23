@@ -1,0 +1,47 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set route_params = app.request.attributes.get('_route_params') %}
+{% set params = route_params|merge(app.request.query.all) %}
+
+{% if paginator.pageCount > 1 %}
+    {% set nearbyPagesLimit = 4 %}
+
+    <div class="d-flex justify-content-between">
+        <div>Page {{ paginator.page }} of {{ paginator.pageCount }}</div>
+        <ul class="pagination mb-0">
+
+            {% for i in 1..paginator.pageCount %}
+                {% if (paginator.page - nearbyPagesLimit) - loop.index == 0 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path(route, params|merge({ page: 1 })) }}">1</a>
+                    </li>
+                    {% if loop.index != 1 %}
+                        <li class="page-item">
+                            <span class="page-link">…</span>
+                        </li>
+                    {% endif %}
+                {% elseif (paginator.page + nearbyPagesLimit) - loop.index == 0 and (paginator.page + nearbyPagesLimit) < paginator.pageCount %}
+                    {% if loop.index != paginator.last %}
+                        <li class="page-item">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path(route, params|merge({ page: paginator.lastPage })) }}">{{ paginator.lastPage }}</a>
+                    </li>
+                {% elseif 0 < (paginator.page - nearbyPagesLimit) - loop.index %}
+                {% elseif 0 > (paginator.page + nearbyPagesLimit) - loop.index %}
+                {% else %}
+                    <li class="page-item {% if paginator.page == loop.index %}active{% endif %}">
+                        {% if paginator.page == loop.index %}
+                            <span class="page-link">{{ loop.index }}</span>
+                        {% else %}
+                            <a href="{{ path(route, params|merge({ page: loop.index })) }}" class="page-link">{{ loop.index }}</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+
+{% endif %}

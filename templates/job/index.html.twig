@@ -3,30 +3,41 @@
 {% block title %}Jobs{% endblock %}
 
 {% block content %}
-    <ul>
-        <li><a href="{{ url('app_job') }}">Twig</a></li>
-        <li><a href="{{ url('app_job_vue') }}">Vue</a></li>
-    </ul>
-
-    <div class="row g-5">
-        <div class="col-md-6">
-            <h2>Starter projects</h2>
-            <p>Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
-            <ul class="icon-list">
-                <li><a href="https://github.com/twbs/bootstrap-npm-starter" rel="noopener" target="_blank">Bootstrap npm starter</a></li>
-                <li class="text-muted">Bootstrap Parcel starter (coming soon!)</li>
-            </ul>
+    {% if jobs %}
+        <div class="card">
+            <div class="card-header">Jobs ({{ paginator.itemCount }})</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">AccessState</th>
+                            <th scope="col">DateCreated</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                            <tr>
+                                <td>{{ paginator.page > 1 ? loop.index + (paginator.itemsPerPage * (paginator.page - 1)) : loop.index }}</td>
+                                <td>{{ job.title }}</td>
+                                <td>
+                                    <span class="badge text-bg-{{ job.accessState.color }}">{{ job.accessState.description }}</span>
+                                </td>
+                                <td>{{ job.dateCreated.format('d.m.Y') }}</td>
+                                <td>
+                                    <a href="{{ absolute_url(job.publicLink) }}">Public</a>
+                                    <a href="{{ absolute_url(job.editLink) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                {% include 'common/_paginator.html.twig' with { paginator } %}
+            </div>
         </div>
-
-        <div class="col-md-6">
-            <h2>Guides</h2>
-            <p>Read more detailed instructions and documentation on using or contributing to Bootstrap.</p>
-            <ul class="icon-list">
-                <li><a href="/docs/5.0/getting-started/introduction/">Bootstrap quick start guide</a></li>
-                <li><a href="/docs/5.0/getting-started/webpack/">Bootstrap Webpack guide</a></li>
-                <li><a href="/docs/5.0/getting-started/parcel/">Bootstrap Parcel guide</a></li>
-                <li><a href="/docs/5.0/getting-started/build-tools/">Contributing to Bootstrap</a></li>
-            </ul>
-        </div>
-    </div>
+    {% endif %}
 {% endblock %}

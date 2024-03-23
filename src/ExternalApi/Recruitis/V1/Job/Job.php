@@ -48,7 +48,7 @@ class Job
         /** @var Employment[] $employments */
         public readonly array $employments,
         public readonly ?JobStats $jobStats,
-        public readonly JobSalary $salary,
+        public readonly ?JobSalary $salary,
         /** @var Channel[] $channels */
         public readonly array $channels,
         public readonly string $editLink,
@@ -112,6 +112,10 @@ class Job
             $jobStats = JobStats::fromArray($data['stats']);
         }
 
+        if (isset($data['salary'])) {
+            $salary = JobSalary::fromArray($data['salary']);
+        }
+
         /** @var Channel[] $channels */
         $channels = [];
 
@@ -146,7 +150,7 @@ class Job
             $addresses,
             $employments,
             $jobStats ?? null,
-            JobSalary::fromArray($data['salary']),
+            $salary ?? null,
             $channels,
             $data['edit_link'],
             $data['public_link'],

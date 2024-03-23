@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ExternalApi\Recruitis\V1;
+namespace App\ExternalApi\Recruitis\V1\Enum;
 
 enum Currency: string
 {

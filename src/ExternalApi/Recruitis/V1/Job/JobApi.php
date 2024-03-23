@@ -19,14 +19,19 @@ class JobApi
     /**
      * @throws Exception
      */
-    public function list(): JobResponse
+    public function list(int $limit, int $page): JobResponse
     {
-        $response = $this->client->get(self::JOBS);
+        $response = $this->client->get(self::JOBS, [
+            'query' => [
+                'limit' => $limit,
+                'page' => $page,
+            ],
+        ]);
 
         try {
             return JobResponse::fromArray($response->toArray());
         } catch (Throwable $e) {
-            throw new Exception('List jobs error.', $e->getCode(), $e->getPrevious());
+            throw new Exception($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
     }
 }
