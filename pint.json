@@ -1,8 +1,6 @@
 {
     "preset": "laravel",
-    "exclude": [
-        "var/"
-    ],
+    "exclude": ["var/"],
     "rules": {
         "blank_line_after_opening_tag": true,
         "nullable_type_declaration_for_default_null_value": true,

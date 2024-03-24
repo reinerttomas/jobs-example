@@ -1,19 +1,30 @@
-import { defineConfig } from "vite";
-import symfonyPlugin from "vite-plugin-symfony";
+import { defineConfig } from 'vite';
+import { dirname, resolve } from 'path';
+import symfonyPlugin from 'vite-plugin-symfony';
+import vuePlugin from '@vitejs/plugin-vue';
+import { fileURLToPath } from 'url';
 
-/* if you're using React */
-// import react from '@vitejs/plugin-react';
+const workdir = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-    plugins: [
-        /* react(), // if you're using React */
-        symfonyPlugin(),
-    ],
-    build: {
-        rollupOptions: {
-            input: {
-                app: "./assets/app.js"
-            },
-        }
+  plugins: [vuePlugin(), symfonyPlugin()],
+  build: {
+    manifest: true,
+    rollupOptions: {
+      input: {
+        app: './assets/app.js',
+        page: './assets/page/main.js',
+      },
+      output: {
+        manualChunks: {
+          vue: ['vue'],
+        },
+      },
     },
+  },
+  resolve: {
+    alias: {
+      '~': resolve(workdir, 'assets'),
+    },
+  },
 });
