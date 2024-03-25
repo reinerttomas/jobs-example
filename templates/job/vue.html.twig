@@ -3,15 +3,17 @@
 {% block title %}Vue{% endblock %}
 
 {% block content %}
-    <div id="app"></div>
+    <div id="app">
+        <job-list />
+    </div>
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ vite_entry_link_tags('page') }}
+    {{ vite_entry_link_tags('vue') }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {{ vite_entry_script_tags('page') }}
+    {{ vite_entry_script_tags('vue') }}
 {% endblock %}

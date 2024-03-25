@@ -1,4 +1,8 @@
-import { createApp } from 'vue';
-import App from './App.vue';
+import { createApp } from 'vue'
+import JobList from './components/JobList.vue'
 
-createApp(App).mount('#app');
+const app = createApp()
+
+app.component('job-list', JobList)
+
+app.mount('#app')

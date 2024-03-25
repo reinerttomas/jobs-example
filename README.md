@@ -11,7 +11,7 @@ This project is a simple application built with Symfony. It shows list of jobs b
 -   ✅ PHPStan
 -   ✅ Laravel Pint (PHP Coding Standards Fixer)
 -   ✅ Tests
--   🚫 Vue.js
+-   ✅ Vue.js
 
 ## RecruitisApi
 

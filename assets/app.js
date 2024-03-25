@@ -1,3 +1,3 @@
-import './styles/app.scss';
+import './styles/app.scss'
 
-console.log('Happy coding !!');
+console.log('Happy coding !!')
